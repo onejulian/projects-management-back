@@ -42,7 +42,8 @@ class TaskController extends Controller
         $user = auth()->user();
 
         $project = Project::where('user_id', $user->id)->where('id', $project_id)->first();
-        if (!$project) {
+        $assignments = Assignment::where('user_id', $user->id)->where('project_id', $project_id)->first();
+        if (!$project && !$assignments) {
             return response()->json([
                 'message' => 'El proyecto no se encuentra.'
             ], 400);
