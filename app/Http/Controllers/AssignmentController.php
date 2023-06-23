@@ -22,15 +22,20 @@ class AssignmentController extends Controller
             ], 400);
         }
 
-        $users = [];
+        $allData = [];
 
         $assignments = Assignment::where('project_id', $project_id)->get();
 
         foreach ($assignments as $assignment) {
             $user = User::where('id', $assignment->user_id)->first();
-            array_push($users, $user);
+            $data = [
+                'id' => $assignment->id,
+                'project_id' => $assignment->project_id,
+                'user' => $user
+            ];
+            array_push($allData, $data);
         }
-        return response()->json($users, 200);
+        return response()->json($allData, 200);
     }
 
     /**
