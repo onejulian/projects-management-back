@@ -22,8 +22,15 @@ class AssignmentController extends Controller
             ], 400);
         }
 
+        $users = [];
+
         $assignments = Assignment::where('project_id', $project_id)->get();
-        return response()->json($assignments, 200);
+
+        foreach ($assignments as $assignment) {
+            $user = User::where('id', $assignment->user_id)->first();
+            array_push($users, $user);
+        }
+        return response()->json($users, 200);
     }
 
     /**
