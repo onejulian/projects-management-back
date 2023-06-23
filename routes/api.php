@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,5 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::get('/assignments/{id}/{project_id}', [AssignmentController::class, 'show'])->name('assignments.show');
     Route::get('/assignments/{project_id}', [AssignmentController::class, 'index'])->name('assignments.index');
     Route::delete('/assignments/{id}/{project_id}', [AssignmentController::class, 'destroy'])->name('assignments.destroy');
+    Route::get('/users/{email}', [UserController::class, 'getUserbyEmail'])->name('users.getUserbyEmail');
 });
